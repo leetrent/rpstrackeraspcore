@@ -13,4 +13,8 @@
     <ProjectReference Include="..\RPS.Data\RPS.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\kendo\" />
+  </ItemGroup>
+
 </Project>
