@@ -5,8 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2022.2.510" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RPS.Core\RPS.Core.csproj" />
     <ProjectReference Include="..\RPS.Data\RPS.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\kendo\" />
   </ItemGroup>
 
 </Project>
