@@ -1,9 +1,7 @@
 ﻿@page
 @model RPS.Web.Pages.DashboardModel
 
-@{ 
-    var userId = ViewData["userId"];
-}
+@{ var userId = ViewData["userId"]; }
 
 <div class="dashboard">
 
@@ -14,10 +12,9 @@
                 <span class="small text-uppercase text-muted d-block">Statistics</span>
                 @if (Model.DateStart.HasValue && Model.DateEnd.HasValue)
                 {
-                    <span id="spanFilteredDateRange">
-                        @Model.DateStart.Value.ToString("MMM d, yyyy") - @Model.DateEnd.Value.ToString("MMM d, yyyy")
-                    </span>
-                }
+    <span id="spanFilteredDateRange">
+        @Model.DateStart.Value.ToString("MMM d, yyyy") - @Model.DateEnd.Value.ToString("MMM d, yyyy")
+    </span>}
 
             </h2>
         </div>
@@ -33,6 +30,8 @@
                 <button type="button" class="pt-class-range-filter" data-range="12" onclick="location.href = '/?months=12&userId=@userId'">
                     1 Year
                 </button>
+                <kendo-button name="btnFilter36Months" deferred="true" class="k-state-active">3 years</kendo-button>
+                <kendo-button class="k-primary" name="btnFilter60Months" deferred="true">5 years</kendo-button>
             </div>
         </div>
     </div>
@@ -98,9 +97,11 @@
 </div>
 
 
-
 @section styles {
     <link href="~/css/dashboard.css" rel="stylesheet" />
 }
 
+@section scripts {
+
+}
 
