@@ -57,6 +57,7 @@
                 name="SelectedPriority"
                 value="@Model.SelectedPriority"
                 bind-to="Model.Priorities"
+                template="<span class='badge priority-#:data.toLowerCase()#'>#:data#</span>"
             />
         </div>
     </div>
