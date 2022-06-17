@@ -21,7 +21,13 @@
     <div class="form-group row">
         <label asp-for="@Model.Estimate" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-6">
-            <input type="range" asp-for="@Model.Estimate" min="0" max="20" step="1" class="form-control" />
+            <kendo-slider 
+                for="@Model.Estimate"
+                min="0"
+                max="20"
+                large-step="1"
+                style="width:100%;"
+            />
         </div>
     </div>
 
