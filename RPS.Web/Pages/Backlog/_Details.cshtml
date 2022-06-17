@@ -33,6 +33,7 @@
                 name="SelectedItemType"
                 value="@Model.SelectedItemType"
                 bind-to="Model.ItemTypes"
+                template-id="templateItemType"
             />
         </div>
     </div>
@@ -80,3 +81,8 @@
         </div>
     </div>
 </form>
+
+<script id="templateItemType" type="text/x-kendo-template">
+    <img src="@Url.Content("~/images/icon_#:data#.png")" class="backlog-icon" />
+    <span>#: data #</span>
+</script>
