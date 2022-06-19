@@ -1,7 +1,10 @@
 ﻿@page
 @model RPS.Web.Pages.DashboardModel
 
-@{ var userId = ViewData["userId"]; }
+@{ 
+    var userId = ViewData["userId"]; 
+    var months = (int?)ViewData["months"];
+}
 
 <div class="dashboard">
 
@@ -20,6 +23,19 @@
         </div>
 
         <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <kendo-combobox
+                    name="filterAssignee"
+                    bind-to="Model.Assignees"
+                    value=@Model.SelectedAssigneeId
+                    datatextfield="FullName"
+                    datavaluefield="Id"
+                    placeholder="Select assginee..."
+                    on-change="onAssigneeChange"
+                    template-id="templateAssignee"
+                    style="width:260px;">                
+                </kendo-combobox>
+            </div>
             <div class="btn-group mr-2">
                 <button type="button" class="pt-class-range-filter" data-range="3" onclick="location.href = '/?months=3&userId=@userId'">
                     3 Months
@@ -95,6 +111,12 @@
     </div>
 
 </div>
+<script id="templateAssignee" type="text/x-kendo-template">
+    <div class="row" style="margin-left: 5px;">
+        <img src="@Url.Content("~/#:data.Avatar#")" class="li-avatar rounded mx-auto" />
+        <span style="margin-left: 5px;">#:data.FullName#</span>
+    </div>
+</script>
 
 
 @section styles {
@@ -102,6 +124,27 @@
 }
 
 @section scripts {
+    <script>
+        @{
+            var userIdParam = "";
+            if (userId != null)
+            {
+                userIdParam = "&userId=" + userId;
+            }
 
+            var monthsParam = "";
+            if (months != null) {
+                monthsParam = "months=" + months;
+            }
+        }
+        function onAssigneeChange(evt) {
+            let userId = evt.sender.value();
+            if (userId) {
+                location.href = `/?userId=${userId}&@Html.Raw(monthsParam)`;
+            } else {
+                location.href = `/?@Html.Raw(monthsParam)`;
+            }
+        }
+    </script>
 }
 

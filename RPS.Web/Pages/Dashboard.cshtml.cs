@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RPS.Core.Models.Dto;
+using RPS.Core.Models;
 using RPS.Data;
 
 namespace RPS.Web.Pages
@@ -12,6 +13,7 @@ namespace RPS.Web.Pages
     public class DashboardModel : PageModel
     {
         private readonly IPtDashboardRepository rpsDashRepo;
+        private readonly IPtUserRepository rpsUserRepo;
 
         public DateTime? DateStart { get; set; }
         public DateTime? DateEnd { get; set; }
@@ -31,10 +33,13 @@ namespace RPS.Web.Pages
             } 
         }
 
+        public int? SelectedAssigneeId { get; set; }
+        public List<PtUser> Assignees { get; set; }
 
-        public DashboardModel(IPtDashboardRepository rpsDashData)
+        public DashboardModel(IPtDashboardRepository rpsDashData, IPtUserRepository rpsUserData)
         {
             rpsDashRepo = rpsDashData;
+            rpsUserRepo = rpsUserData;
         }
 
         public void OnGet(int? userId, int? months)
@@ -60,6 +65,12 @@ namespace RPS.Web.Pages
             {
                 DateStart = filter.DateStart;
                 DateEnd = filter.DateEnd;
+            }
+
+            Assignees = rpsUserRepo.GetAll().ToList();
+            if (userId.HasValue) 
+            {
+                SelectedAssigneeId = userId.Value;
             }
         }
     }
