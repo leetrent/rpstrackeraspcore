@@ -17,7 +17,27 @@
     </div>
 </div>
 
-@{
+<kendo-tabstrip name="tabstrip">
+    <items>
+        <tabstrip-item text="Details" selected="@Model.Screen == DetailScreenEnum.Details">
+            <content>
+                <partial name="_Details" model="@Model.DetailsFormVm" />
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Tasks" selected="@Model.Screen == DetailScreenEnum.Tasks">
+            <content>
+                <partial name="_Tasks" model="@Model.TasksFormVm" />
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Chitchat" selected="@Model.Screen == DetailScreenEnum.Chitchat">
+            <content>
+                <partial name="_Chitchat" model="@Model.ChitchatFormVm" />
+            </content>
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+
+@*@{
     switch (Model.Screen)
     {
         case DetailScreenEnum.Details:
@@ -30,7 +50,7 @@
             <partial name="_Chitchat" model="@Model.ChitchatFormVm" />
             break;
     }
-}
+}*@
 
 @section styles {
     <link href="~/css/detail.css" rel="stylesheet" />
