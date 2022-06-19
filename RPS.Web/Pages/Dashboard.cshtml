@@ -32,6 +32,7 @@
                     datavaluefield="Id"
                     placeholder="Select assginee..."
                     on-change="onAssigneeChange"
+                    template-id="templateAssignee"
                     style="width:260px;">                
                 </kendo-combobox>
             </div>
@@ -110,6 +111,12 @@
     </div>
 
 </div>
+<script id="templateAssignee" type="text/x-kendo-template">
+    <div class="row" style="margin-left: 5px;">
+        <img src="@Url.Content("~/#:data.Avatar#")" class="li-avatar rounded mx-auto" />
+        <span style="margin-left: 5px;">#:data.FullName#</span>
+    </div>
+</script>
 
 
 @section styles {
