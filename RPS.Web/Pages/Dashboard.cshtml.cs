@@ -36,6 +36,14 @@ namespace RPS.Web.Pages
         public int? SelectedAssigneeId { get; set; }
         public List<PtUser> Assignees { get; set; }
 
+        //////////////////////////////////////////////////////////////////////////////////////////
+        // For Chart
+        //////////////////////////////////////////////////////////////////////////////////////////
+        public object[] Categories { get; set; } // Object array is required if using tag helpers
+        public List<int> ItemsOpenByMonth { get; set; }
+        public List<int> ItemsClosedByMonth { get; set; }
+        //////////////////////////////////////////////////////////////////////////////////////////
+
         public DashboardModel(IPtDashboardRepository rpsDashData, IPtUserRepository rpsUserData)
         {
             rpsDashRepo = rpsDashData;
@@ -72,6 +80,21 @@ namespace RPS.Web.Pages
             {
                 SelectedAssigneeId = userId.Value;
             }
+
+            /////////////////////////////////////////////////////////////////////////////////
+            // Chart related
+            /////////////////////////////////////////////////////////////////////////////////
+            var filteredIssues = rpsDashRepo.GetFilteredIssues(filter);
+            this.ItemsOpenByMonth = new List<int>();
+            this.ItemsClosedByMonth = new List<int>();
+
+            filteredIssues.MonthItems.ForEach(mi => {
+                this.ItemsOpenByMonth.Add(mi.Open.Count);
+                this.ItemsClosedByMonth.Add(mi.Closed.Count);
+            });
+
+
+            this.Categories = filteredIssues.Categories.Select(cat => (object)cat).ToArray();
         }
     }
 }
